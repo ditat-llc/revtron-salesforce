@@ -42,7 +42,13 @@ class Database:
 
     def create_engine_from_url(self, db_url: str, schema: str):
         try:
-            self.engine = create_engine(db_url, pool_pre_ping=True)
+            self.engine = create_engine(
+                db_url, 
+                pool_pre_ping=True,
+                pool_recycle=3600,
+                pool_size=10,
+                max_overflow=20,
+            )
             self.schema = schema
             self.execute_raw('select 1 as is_alive;')
         except Exception as e:
