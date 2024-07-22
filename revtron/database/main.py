@@ -300,6 +300,7 @@ class Database:
                     result.append(dict(row))
                 return result
             else:
+                response.close()
                 return None
 
 
