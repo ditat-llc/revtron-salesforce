@@ -293,15 +293,10 @@ class Database:
     def execute_raw(self, query: str) -> Optional[list[dict]]:
         with self.engine.connect() as conn:
             response = conn.execute(text(query))
-            ### only fetch results if the query is a select statement
-            if query.strip().lower().startswith('select'):
-                result = []
-                for row in response.mappings():
-                    result.append(dict(row))
-                return result
-            else:
-                response.close()
-                return None
+        result = []
+        for row in response.mappings():
+            result.append(dict(row))
+        return result
 
 
 if __name__ == '__main__':
