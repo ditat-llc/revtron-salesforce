@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 import inspect
 
 from pydantic import BaseModel
@@ -290,13 +290,17 @@ class Database:
         with self.engine.connect() as conn:
             conn.execute(stmt)
 
-    def execute_raw(self, query: str) -> list[dict]:
+    def execute_raw(self, query: str) -> Optional[list[dict]]:
         with self.engine.connect() as conn:
             response = conn.execute(text(query))
-        result = []
-        for row in response.mappings():
-            result.append(dict(row))
-        return result
+            ### only fetch results if the query is a select statement
+            if query.strip().lower().startswith('select'):
+                result = []
+                for row in response.mappings():
+                    result.append(dict(row))
+                return result
+            else:
+                return None
 
 
 if __name__ == '__main__':
