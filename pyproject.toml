@@ -6,10 +6,10 @@ build-backend = "hatchling.build"
 name = "revtron"
 version = "0.0.10"
 authors = [
-  { name="Revtron Inc.", email="tomas@ditat.io" },
+  { name="Revtron Inc.", email="dylan@ditat.io" },
 ]
 license = {file = "LICENSE"}
-description = "Revtron Utils"
+description = "Revtron Salesforce"
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
 classifiers = [
@@ -18,13 +18,10 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-	"pydantic",
-	"SQLAlchemy==1.4.46",
-	"psycopg2-binary",
 	"requests",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/ditat-llc/revtron-utils"
+"Homepage" = "https://github.com/ditat-llc/revtron-salesforce"
 
 [project.scripts]
